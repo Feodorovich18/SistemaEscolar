@@ -11,6 +11,8 @@ public class Materia {
 	String docenteAsignado;
 	String horario;
 	
+	ArrayList<Alumno> alumnosInscritos = new ArrayList<Alumno>();
+	
 	
 	
 	/**********************
@@ -32,6 +34,13 @@ public class Materia {
 		this.nombreMateria = input.readLine();
 		
 		System.out.println("\nMateria Registrada: " + this.nombreMateria);
+		
+	}
+	
+	
+	
+	public Materia(String materiaAsignadaAlDocente) throws IOException {
+		this.nombreMateria = materiaAsignadaAlDocente;
 		
 	}
 	

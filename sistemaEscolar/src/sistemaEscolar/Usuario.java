@@ -1,5 +1,8 @@
 package sistemaEscolar;
 
+import java.util.*;
+import java.io.*;
+
 public class Usuario {
 
 	protected String nombre;
@@ -27,9 +30,48 @@ public class Usuario {
 	
 	
 	
-	public boolean iniciarSesion() {
-		return true;
+	
+	/*********************************************************************/
+	public static void iniciarSesion(Administrador adminGeneral) throws IOException{
+		InputStreamReader isr = new InputStreamReader(System.in);
+		BufferedReader input = new BufferedReader(isr);
+		
+		
+		
+		int entradaClave;
+		
+		
+		System.out.println("\n\n\n-------------------INICIO DE SESION------------------");
+		System.out.print("Introduzca su clave de usuario: ");
+		entradaClave = Integer.parseInt(input.readLine());
+		
+		
+		if(adminGeneral.getClaveAcceso() == entradaClave) {
+			adminGeneral.controlAdministrador();
+		}
+		
+		
+		for(Alumno e: Administrador.alumnos) {
+			if(e.getClaveAcceso() == entradaClave) {
+				
+				e.controlAlumno();
+				break;
+				
+				
+			}
+		}
+		
+		for(Docente e: Administrador.docentes) {
+			if(e.getClaveAcceso() == entradaClave) {
+				break;
+			}
+		}
+		
+		
+		
 	}
+	
+	
 	
 	
 	/*****************************************************************************/

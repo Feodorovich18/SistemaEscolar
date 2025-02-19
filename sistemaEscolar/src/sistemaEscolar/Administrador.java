@@ -100,7 +100,37 @@ public class Administrador extends Usuario{
 			
 		}while(input.readLine().equalsIgnoreCase("s"));
 	}
+	//********************************************************************
 	
+	public void controlAdministrador() throws IOException{
+		InputStreamReader isr = new InputStreamReader(System.in);
+		BufferedReader input = new BufferedReader(isr);
+	
+		int numOpc;
+		System.out.println("Bienvenido, " + this.getNombreCompleto());
+		
+		do {
+			System.out.println("Elija un numero de opcion: \n 1) Registrar Docente\n 2) Registrar Alumno\n 3) Actualizar Informacion Docente \n 4) Actualizar Informacion Alumno \n 5) Salir");
+			
+			numOpc = Integer.parseInt(input.readLine());
+			
+			switch(numOpc) {
+			
+				case 1:
+					this.registrarDocente();
+				break;
+				
+				case 2:
+					this.registrarAlumno();
+				break;
+				
+				case 3:
+					
+				break;
+			}
+			
+		}while(numOpc != 5);
+	}
 	
 	
 
@@ -119,7 +149,7 @@ public class Administrador extends Usuario{
 			System.out.println("\nPRIMER BLOQUE:");
 			for(int i=0; i<materias1erBloque.length; i++) {
 				
-				if(materias1erBloque[i].vacante1erBloque[i]) {
+				if(Materia.vacante1erBloque[i]) {
 					System.out.println(materias1erBloque[i].getNombreMateria());
 				}
 						
@@ -128,7 +158,7 @@ public class Administrador extends Usuario{
 			System.out.println("\nSEGUNDO BLOQUE:");
 			for(int i=0; i<materias2doBloque.length; i++) {
 				
-				if(materias2doBloque[i].vacante2doBloque[i]) {
+				if(Materia.vacante2doBloque[i]) {
 					System.out.println(materias2doBloque[i].getNombreMateria());
 				}
 			}
@@ -136,41 +166,63 @@ public class Administrador extends Usuario{
 			System.out.println("\nTERCER BLOQUE:");
 			for(int i=0; i<materias3erBloque.length; i++) {
 				
-				if(materias3erBloque[i].vacante3erBloque[i]) {
+				if(Materia.vacante3erBloque[i]) {
 					System.out.println(materias3erBloque[i].getNombreMateria());
 				}
 			}
+		
 			
 			
-			System.out.print("Elija la materia para asignar al Docente: ");	
-			entradaMateria = input.readLine();
 			
-			for(int i=0; i<materias1erBloque.length; i++) {
-				if(entradaMateria.equalsIgnoreCase(materias1erBloque[i].getNombreMateria())){
-					
-					e.listaMaterias.add(null);
-					
-					System.out.println("Materia Asignada: " + materias1erBloque[i].getNombreMateria());
+			
+			do {
+				System.out.print("\nElija la materia para asignar al Docente: ");	
+				entradaMateria = input.readLine();
+			
+				
+				for(int i=0; i<materias1erBloque.length; i++) {
+					if(entradaMateria.equalsIgnoreCase(materias1erBloque[i].getNombreMateria())){
+						
+						e.listaMaterias.add(new Materia(materias1erBloque[i].getNombreMateria()));
+						Materia.vacante1erBloque[i] = false;
+						
+						System.out.println("\n Materia Asignada: " + materias1erBloque[i].getNombreMateria());
+					}
 				}
-			}
-			
-			for(int i=0; i<materias2doBloque.length; i++) {
-				if(entradaMateria.equalsIgnoreCase(materias2doBloque[i].getNombreMateria())){
-					
-					e.listaMaterias.add(null);
-					
-					System.out.println("Materia Asignada: " + materias2doBloque[i].getNombreMateria());
+				
+				
+				
+				for(int i=0; i<materias2doBloque.length; i++) {
+					if(entradaMateria.equalsIgnoreCase(materias2doBloque[i].getNombreMateria())){
+						
+						e.listaMaterias.add(new Materia(materias2doBloque[i].getNombreMateria()));
+						Materia.vacante2doBloque[i] = false;
+						
+						System.out.println("\n Materia Asignada: " + materias2doBloque[i].getNombreMateria());
+					}
 				}
-			}
-			
-			for(int i=0; i<materias3erBloque.length; i++) {
-				if(entradaMateria.equalsIgnoreCase(materias3erBloque[i].getNombreMateria())){
-					
-					e.listaMaterias.add(null);
-					
-					System.out.println("Materia Asignada: " + materias3erBloque[i].getNombreMateria());
+				
+				
+				
+				for(int i=0; i<materias3erBloque.length; i++) {
+					if(entradaMateria.equalsIgnoreCase(materias3erBloque[i].getNombreMateria())){
+						
+						e.listaMaterias.add(new Materia(materias3erBloque[i].getNombreMateria()));
+						Materia.vacante3erBloque[i] = false;
+						
+						System.out.println("\n Materia Asignada: " + materias3erBloque[i].getNombreMateria());
+					}
 				}
-			}
+				
+				
+				System.out.println("\nMaterias Asignadas: ");
+				for(int i=0; i<e.listaMaterias.size(); i++) {
+					System.out.println(e.listaMaterias.get(i).getNombreMateria());
+				}
+				
+				System.out.println("\n Asignar otra Materia? [S/N]: ");
+				
+			}while(input.readLine().equalsIgnoreCase("s"));
 		}
 		
 		
